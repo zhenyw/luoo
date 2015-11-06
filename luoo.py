@@ -49,8 +49,9 @@ for d in dlist:
 if args.info:
     sys.exit(0)
 
-os.mkdir(issue_no)
-os.chdir(issue_no)
+mdir=vol[0] + '.' + title[0]
+os.mkdir(mdir)
+os.chdir(mdir)
 
 with open("content", 'wb') as fd:
     fd.write(vol[0] + ".")
@@ -69,6 +70,5 @@ for n in range(len(ddlist)):
     with open(name, 'wb') as fd:
         for chunk in r.iter_content(chunk_size):
             fd.write(chunk)
-    print "save " + name
 
 print "Done."
