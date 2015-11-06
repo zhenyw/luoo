@@ -32,6 +32,9 @@ print vol[0]
 title = tree.xpath('//div[@class="musiclist"]//span[@class="vol-title"]/text()')
 print title[0]
 
+cover = tree.xpath('//img[@class="vol-cover"]/@src')
+#print cover
+
 content = tree.xpath('//div[@class="vol-desc"]/text()')
 for c in content:
     print c
@@ -63,6 +66,12 @@ with open("content", 'wb') as fd:
         fd.write('\t' + authorlist[m].encode('UTF-8') + '\n')
 
 chunk_size=512
+
+r_img = requests.get(cover[0], proxies=proxies)
+with open("cover.jpg", 'wb') as fd:
+    for chunk in r_img.iter_content(chunk_size):
+        fd.write(chunk)
+        
 for n in range(len(ddlist)):
     print "downloading " + mlist[n]
     r = requests.get(ddlist[n], proxies=proxies)
